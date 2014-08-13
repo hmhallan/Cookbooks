@@ -7,7 +7,7 @@ execute "uncompress wildfly" do
 end
 
 execute "create symlink" do
-  command "ln -s #{node[:wildfly][:extract_dir]}/#{node[:wildfly][:extract_extract_name]} #{default[:wildfly][:home]}"
+  command "ln -s #{node[:wildfly][:extract_dir]}/#{node[:wildfly][:extract_name]} #{default[:wildfly][:home]}"
 end
 
 file "#{node[:wildfly][:package_tmp]}" do
