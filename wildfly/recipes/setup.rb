@@ -1,15 +1,15 @@
-execute "sanity check" do
-  command "touch /tmp/sanity-check-wildfly-param"
-end
-
 execute "copy wildfly tarball from S3" do
-  command "aws s3 cp --region=sa-east-1 #{node[:wildfly][:package_object]} /tmp/wildfly-8.1.0.Final.tar.gz"
+  command "aws s3 cp --region=#{node[:wildfly][:bucket_region]} #{node[:wildfly][:package_object]} #{node[:wildfly][:package_tmp]}"
 end
 
 execute "uncompress wildfly" do
-  command "tar zxvf /tmp/wildfly-8.1.0.Final.tar.gz -C /opt"
+  command "tar zxvf #{node[:wildfly][:package_tmp]} -C #{node[:wildfly][:extract_dir]}"
 end
 
 execute "create symlink" do
-  command "ln -s /opt/wildfly-8.1.0.Final /opt/wildfly"
+  command "ln -s #{node[:wildfly][:extract_dir]}/#{node[:wildfly][:extract_extract_name]} #{default[:wildfly][:home]}"
+end
+
+file "#{node[:wildfly][:package_tmp]}" do
+  action :delete
 end
