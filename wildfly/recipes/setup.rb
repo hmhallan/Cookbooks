@@ -1,4 +1,4 @@
-log "ALL YOU NEED IS LOG"
+log "Running wildfly setup"
 
 execute "get-package-object" do
   command "aws s3 cp --region=#{node[:wildfly][:bucket_region]} #{node[:wildfly][:package_object]} #{node[:wildfly][:package_tmp]}"
