@@ -11,20 +11,20 @@ template 'kornell-api-container-configuration' do
   backup false
 end
 
-ENV['JDBC_CONNECTION_STRING'] = "#{node[:kornell-api][:jdbc][:url]}"
-ENV['JDBC_DRIVER'] = "#{node[:kornell-api][:jdbc][:driver]}"
-ENV['JDBC_USERNAME'] = "#{node[:kornell-api][:jdbc][:username]}"
-ENV['JDBC_PASSWORD'] = "#{node[:kornell-api][:jdbc][:password]}"
+ENV['JDBC_CONNECTION_STRING'] = "#{node[:kornell_api][:jdbc][:url]}"
+ENV['JDBC_DRIVER'] = "#{node[:kornell_api][:jdbc][:driver]}"
+ENV['JDBC_USERNAME'] = "#{node[:kornell_api][:jdbc][:username]}"
+ENV['JDBC_PASSWORD'] = "#{node[:kornell_api][:jdbc][:password]}"
 
-ENV['NEWRELIC_ENV'] = "#{node[:kornell-api][:newrelic][:environment]}"
+ENV['NEWRELIC_ENV'] = "#{node[:kornell_api][:newrelic][:environment]}"
 
-ENV['SMTP_HOST'] = "#{node[:kornell-api][:smtp][:host]}"
-ENV['SMTP_PORT'] = "#{node[:kornell-api][:smtp][:port]}"
-ENV['SMTP_USERNAME'] = "#{node[:kornell-api][:smtp][:username]}"
-ENV['SMTP_PASSWORD'] = "#{node[:kornell-api][:smtp][:password]}"
-ENV['REPLY_TO'] = "#{node[:kornell-api][:smtp][:reply-to]}"
+ENV['SMTP_HOST'] = "#{node[:kornell_api][:smtp][:host]}"
+ENV['SMTP_PORT'] = "#{node[:kornell_api][:smtp][:port]}"
+ENV['SMTP_USERNAME'] = "#{node[:kornell_api][:smtp][:username]}"
+ENV['SMTP_PASSWORD'] = "#{node[:kornell_api][:smtp][:password]}"
+ENV['REPLY_TO'] = "#{node[:kornell_api][:smtp][:reply-to]}"
 
-ENV['USER_CONTENT_BUCKET'] = "#{node[:kornell-api][:user-content]}"
+ENV['USER_CONTENT_BUCKET'] = "#{node[:kornell_api][:user-content]}"
 
 
 bash 'start-kornell-api' do
