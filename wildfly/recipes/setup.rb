@@ -1,24 +1,24 @@
 log "Setup wildfly"
 
-execute "get-package-object" do
+execute "wildfly-get-package" do
   command "aws s3 cp --region=#{node[:wildfly][:bucket_region]} #{node[:wildfly][:package_object]} #{node[:wildfly][:package_tmp]}"
   not_if  { File.directory?('#{node[:wildfly][:home]}') }
   notifies :run, 'execute[extract-wildfly]', :immediately
 end
 
-execute "extract-wildfly" do
+execute "wildfly-extract" do
   command "tar zxvf #{node[:wildfly][:package_tmp]} -C #{node[:wildfly][:extract_dir]}"
   action :nothing
   notifies :run, 'execute[create-symlink]', :immediately
 end
 
-execute "create-symlink" do
+execute "wildfly-symlink" do
   command "ln -s #{node[:wildfly][:extract_dir]}/#{node[:wildfly][:extract_name]} #{node[:wildfly][:home]}"
   action :nothing
   notifies :run, 'execute[cleanup]', :immediately
 end
 
-execute "cleanup" do
+execute "wildfly-cleanup" do
   command "rm #{node[:wildfly][:package_tmp]}"
   action :nothing
 end
