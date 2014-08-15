@@ -1,4 +1,4 @@
-name        "mysql-connector-j"
+name        "mysql_jdbc"
 description 'MySQL Connector J Operations'
 maintainer  "Craftware"
 license     "Apache 2.0"

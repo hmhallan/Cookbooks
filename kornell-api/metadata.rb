@@ -6,4 +6,4 @@ version     "1.0.0"
 
 depends 'wildfly'
 depends 'newrelic'
-depends 'mysql-connector-j'
+depends 'mysql_jdbc'
