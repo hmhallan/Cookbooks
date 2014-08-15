@@ -22,9 +22,9 @@ ENV['SMTP_HOST'] = "#{node[:kornell_api][:smtp][:host]}"
 ENV['SMTP_PORT'] = "#{node[:kornell_api][:smtp][:port]}"
 ENV['SMTP_USERNAME'] = "#{node[:kornell_api][:smtp][:username]}"
 ENV['SMTP_PASSWORD'] = "#{node[:kornell_api][:smtp][:password]}"
-ENV['REPLY_TO'] = "#{node[:kornell_api][:smtp][:reply-to]}"
+ENV['REPLY_TO'] = "#{node[:kornell_api][:smtp][:reply_to]}"
 
-ENV['USER_CONTENT_BUCKET'] = "#{node[:kornell_api][:user-content]}"
+ENV['USER_CONTENT_BUCKET'] = "#{node[:kornell_api][:user_content]}"
 
 
 bash 'start-kornell-api' do
