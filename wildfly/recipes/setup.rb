@@ -1,3 +1,5 @@
+log "ALL YOU NEED IS LOG"
+
 execute "copy wildfly tarball from S3" do
   command "aws s3 cp --region=#{node[:wildfly][:bucket_region]} #{node[:wildfly][:package_object]} #{node[:wildfly][:package_tmp]}"
 end
