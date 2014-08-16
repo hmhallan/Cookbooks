@@ -13,12 +13,8 @@ end
 
 log("Setting Envirnment")
 
-ENV['JDBC_CONNECTION_STRING'] = "#{node[:kornell_api][:jdbc][:url]}"
-ENV['JDBC_DRIVER'] = "#{node[:kornell_api][:jdbc][:driver]}"
 ENV['JDBC_USERNAME'] = "#{node[:kornell_api][:jdbc][:username]}"
 ENV['JDBC_PASSWORD'] = "#{node[:kornell_api][:jdbc][:password]}"
-
-ENV['NEWRELIC_ENV'] = "#{node[:kornell_api][:newrelic][:environment]}"
 
 ENV['SMTP_HOST'] = "#{node[:kornell_api][:smtp][:host]}"
 ENV['SMTP_PORT'] = "#{node[:kornell_api][:smtp][:port]}"
@@ -31,17 +27,22 @@ ENV['JAVA_OPTS'] = " -javaagent:/opt/newrelic/newrelic.jar"
 
 log("Starting Kornell API")
 
+wildfly_cmd = "/opt/wildfly/bin/standalone.sh"
+wildfly_cmd <<= " -c standalone-kornell-api.xml"
+wildfly_cmd <<= " -b 0.0.0.0"
+wildfly_cmd <<= " -Dnewrelic.environment=#{node[:kornell_api][:newrelic][:environment]}"
+wildfly_cmd <<= ' -DJNDI_ROOT="java:/"'
+wildfly_cmd <<= ' -DJNDI_DATASOURCE="datasources/KornellDS"'
+wildfly_cmd <<= " -Dkornell.api.jdbc.url=#{node[:kornell_api][:jdbc][:url]}"
+wildfly_cmd <<= " -Dkornell.api.jdbc.driver=#{node[:kornell_api][:jdbc][:driver]}"
+wildfly_cmd <<= " -D kornell.api.jdbc.password=$JDBC_PASSWORD"
+wildfly_cmd <<= " -Dkornell.api.jdbc.username=$JDBC_USERNAME"
+wildfly_cmd <<= " &"
+
+log("[#{wildfly_cmd}]")
+
+
 bash 'start-kornell-api' do
   user 'root'
-  code <<-EOC
-    /opt/wildfly/bin/standalone.sh -c standalone-kornell-api.xml \
- -b 0.0.0.0 \
- -Dnewrelic.environment=${NEWRELIC_ENV-"unknown"} \
- -DJNDI_ROOT="java:/" \
- -DJNDI_DATASOURCE="datasources/KornellDS" \
- -Dkornell.api.jdbc.url=$JDBC_CONNECTION_STRING \
- -Dkornell.api.jdbc.driver=$JDBC_DRIVER \
- -Dkornell.api.jdbc.username=$JDBC_USERNAME \
- -Dkornell.api.jdbc.password=$JDBC_PASSWORD &
-  EOC
+  code "#{wildfly_cmd}"
 end
