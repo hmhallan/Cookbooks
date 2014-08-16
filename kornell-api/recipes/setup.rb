@@ -44,5 +44,8 @@ log("[#{wildfly_cmd}]")
 
 bash 'start-kornell-api' do
   user 'root'
-  code "#{wildfly_cmd}"
+  code <<-EOH
+    echo 'Starting Wildfly [#{wildfly_cmd}]' > /var/log/wildfly_cmd
+    #{wildfly_cmd}
+    EOH
 end
