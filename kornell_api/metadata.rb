@@ -1,4 +1,4 @@
-name        "kornell-api"
+name        "kornell_api"
 description 'Kornell API'
 maintainer  "Craftware"
 license     "Apache 2.0"
