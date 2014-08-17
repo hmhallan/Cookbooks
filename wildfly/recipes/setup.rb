@@ -15,6 +15,12 @@ end
 execute "wildfly-symlink" do
   command "ln -s #{node[:wildfly][:extract_dir]}/#{node[:wildfly][:extract_name]} #{node[:wildfly][:home]}"
   action :nothing
+  notifies :run, 'execute[wildfly-init]', :immediately
+end
+
+execute "wildfly-init" do
+  command "ln -s #{node[:wildfly][:home]}/bin/init.d/wildfly-init-redhat.sh /etc/init.d/wildfly"
+  action :nothing
   notifies :run, 'execute[wildfly-cleanup]', :immediately
 end
 
