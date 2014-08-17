@@ -35,7 +35,7 @@ wildfly_cmd <<= ' -DJNDI_ROOT="java:/"'
 wildfly_cmd <<= ' -DJNDI_DATASOURCE="datasources/KornellDS"'
 wildfly_cmd <<= " -Dkornell.api.jdbc.url=#{node[:kornell_api][:jdbc][:url]}"
 wildfly_cmd <<= " -Dkornell.api.jdbc.driver=#{node[:kornell_api][:jdbc][:driver]}"
-wildfly_cmd <<= " -D kornell.api.jdbc.password=$JDBC_PASSWORD"
+wildfly_cmd <<= " -Dkornell.api.jdbc.password=$JDBC_PASSWORD"
 wildfly_cmd <<= " -Dkornell.api.jdbc.username=$JDBC_USERNAME"
 wildfly_cmd <<= " &"
 

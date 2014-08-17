@@ -22,3 +22,12 @@ execute "wildfly-cleanup" do
   command "rm #{node[:wildfly][:package_tmp]}"
   action :nothing
 end
+
+template 'wildfly-defaults' do
+  path '/etc/default/wildfly.conf'
+  source 'wildfly.conf.erb'
+  owner 'root'
+  group 'root'
+  mode 0644
+  backup false
+end
