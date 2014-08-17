@@ -8,8 +8,8 @@ node[:deploy].each do |application, deploy|
   end
 
   opsworks_deploy do
-#    deploy_data deploy
-#    app application
+    deploy_data deploy
+    app application
   end
 
   tstamp = ""+Time.now.strftime("%Y-%m-%d-%H-%M-%S")
