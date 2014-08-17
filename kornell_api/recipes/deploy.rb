@@ -7,10 +7,10 @@ node[:deploy].each do |application, deploy|
     path deploy[:deploy_to]
   end
 
-#  opsworks_deploy do
+  opsworks_deploy do
 #    deploy_data deploy
 #    app application
-#  end
+  end
 
   tstamp = ""+Time.now.strftime("%Y-%m-%d-%H-%M-%S")
   directory("/var/log/stab/")
