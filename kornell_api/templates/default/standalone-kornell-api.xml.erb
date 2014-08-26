@@ -147,11 +147,11 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:/datasources/KornellDS" pool-name="KornellDS" enabled="true" use-java-context="true">
-                    <connection-url>${kornell.api.jdbc.url:jdbc:mysql://localhost:3306/ebdb?useUnicode=true&amp;characterEncoding=utf8}</connection-url>
-                    <driver>${kornell.api.jdbc.driver:mysql-connector-java.jar_com.mysql.jdbc.Driver_5_1}</driver>
+                    <connection-url>jdbc:<%= node['deploy'][@application]['database']['type'] %>://<%= node['deploy'][@application]['database']['host'] %>:<%= node['deploy'][@application]['database']['port'] %>/<%= node['deploy'][@application]['database']['database'] %>?useUnicode=true&amp;characterEncoding=utf8}</connection-url>
+                    <driver>mysql-connector-java.jar_com.mysql.jdbc.Driver_5_1</driver>
                     <security>
-                        <user-name>${kornell.api.jdbc.username:kornell}</user-name>
-                        <password>${kornell.api.jdbc.password:42kornell73}</password>
+                        <user-name><%= node['deploy'][@application]['database']['username'] %></user-name>
+                        <password><%= node['deploy'][@application]['database']['password'] %></password>
                     </security>
                 </datasource>
                 <drivers>
