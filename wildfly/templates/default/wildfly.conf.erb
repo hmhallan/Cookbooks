@@ -3,9 +3,6 @@ JBOSS_USER=root
 JBOSS_MODE=standalone
 JBOSS_CONFIG=standalone-kornell-api.xml
 
-# System Variables
-export SERVER_OPTS="-b 0.0.0.0"
-
 <% node['wildfly']['java_opts'].each do |key, value| -%>
 export JAVA_OPTS="$JAVA_OPTS <%= key %><% unless value.empty? -%>=<%= value %><% end %>"
 <% end %>
