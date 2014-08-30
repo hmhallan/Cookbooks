@@ -13,7 +13,7 @@ execute "wildfly-extract" do
 end
 
 execute "wildfly-symlink" do
-  command "ln -s #{node[:wildfly][:extract_dir]}/#{node[:wildfly][:extract_name]} #{node[:wildfly][:home]}"
+  command "ln -sf #{node[:wildfly][:extract_dir]}/#{node[:wildfly][:extract_name]} #{node[:wildfly][:home]}"
   action :nothing
   notifies :run, 'execute[wildfly-init]', :immediately
 end
