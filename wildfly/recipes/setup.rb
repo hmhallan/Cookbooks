@@ -7,7 +7,7 @@ execute "wildfly-get-package" do
 end
 
 execute "wildfly-extract" do
-  command "tar zxvf #{node[:wildfly][:package_tmp]} -C #{node[:wildfly][:extract_dir]}"
+  command "unzip #{node[:wildfly][:package_tmp]} -d #{node[:wildfly][:extract_dir]}"
   action :nothing
   notifies :run, 'execute[wildfly-symlink]', :immediately
 end
