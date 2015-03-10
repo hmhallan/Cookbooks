@@ -1,7 +1,7 @@
 log "Setup wildfly"
 
 execute "wildfly-get-package" do
-  command "aws s3 cp --region=#{node[:wildfly][:bucket_region]} #{node[:wildfly][:package_object]} #{node[:wildfly][:package_tmp]}"
+  command "aws s3 cp #{node[:wildfly][:package_object]} #{node[:wildfly][:package_tmp]}"
   not_if  { File.directory?('#{node[:wildfly][:home]}') }
   notifies :run, 'execute[wildfly-extract]', :immediately
 end
