@@ -37,3 +37,5 @@ template 'wildfly-defaults' do
   mode 0644
   backup false
 end
+
+include_recipe 'wildfly::service'
