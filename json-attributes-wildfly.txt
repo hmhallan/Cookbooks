@@ -1,0 +1,9 @@
+{
+	"wildfly" : {
+		"java_opts" : {
+			"-XX:MaxMetaspaceSize" = "256M"
+		}
+		"jboss.bind.address" : "0.0.0.0"
+	}
+
+}
